@@ -1,5 +1,4 @@
 const initialState = {
-  books: [{id:0, title: 'Simple Book'}],
   isReady: false,
   items: null,
 };
@@ -9,7 +8,7 @@ export default (state = initialState, action) => {
     case 'SET_BOOKS':
       return {
         ...state,
-        books: action.payload,
+        items: action.payload,
         isReady: true,
       };
     case 'SET_IS_READY':
