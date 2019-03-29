@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {setBooks} from "./actions/books";
 import axios from 'axios';
+import {Container} from 'semantic-ui-react'
+import MainMenu from "./components/MainMenu";
 
 
 class App extends Component {
@@ -17,26 +19,30 @@ class App extends Component {
 
 
   render() {
-    const {books} = this.props;
+    const {books, isReady} = this.props;
 
     return (
-          <ul>
-            {
-              !books
-                    ? 'Загрузка...'
-                    : books.map((book) => (<li key={book.id}>{book.title}</li>)
-                    )
-            }
-          </ul>
-
-
+          <Container>
+            <MainMenu/>
+            <ul>
+              {
+                !isReady
+                      ? 'Загрузка...'
+                      : books.map((book) => (<li key={book.id}>{book.title}</li>)
+                      )
+              }
+            </ul>
+          </Container>
     );
   }
 }
 
 
 const mapStateToProps = ({books}) => {
-  return {books: books.items}
+  return {
+    books: books.items,
+    isReady: books.isReady
+  }
 };
 
 const mapDispatchToProps = (dispatch) => (
